@@ -16,6 +16,11 @@ define nodejs::service ( $ensure,
 
 }
 
+define nodejs::npm {
+  package { "nodejs-$name": ensure => latest}
+
+}
+
 define nodejs::instance ( $user = 'deploy',
                           $group = 'deploy',
                           $path = '/var/nodes' ) {
