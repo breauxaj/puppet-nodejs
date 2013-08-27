@@ -7,6 +7,15 @@ class nodejs {
 
 }
 
+define nodejs::service ( $ensure,
+                         $enable ) {
+  service { "nodejs-$name":
+    ensure => $ensure,
+    enable => $enable,
+  }
+
+}
+
 define nodejs::instance ( $user = 'deploy',
                           $group = 'deploy',
                           $path = '/var/nodes' ) {
