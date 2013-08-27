@@ -2,20 +2,20 @@
  
 #
 # chkconfig: 35 99 99
-# description: Node.js /var/nodes/instance/server.js
+# description: node.js /var/nodes/<%= name %>/server.js
 #
  
 . /etc/rc.d/init.d/functions
  
-USER=""
+USER="<%= user %>"
  
 DAEMON="/usr/bin/node"
-ROOT_DIR="/var/nodes/instance"
+ROOT_DIR="<%= path %>/<%= name %>"
  
 SERVER="$ROOT_DIR/server.js"
 LOG_FILE="$ROOT_DIR/server.js.log"
  
-LOCK_FILE="/var/lock/subsys/node-server-instance"
+LOCK_FILE="/var/lock/subsys/node-server-<%= name %>"
  
 do_start()
 {
