@@ -19,8 +19,8 @@ nodejs::npm { 'default': required => [ 'options', 'watchit' ] }
 ```
 ```
 nodejs::instance { 'default':
-  $user  => 'deploy',
-  $group => 'deploy',
-  $path  => '/var/nodes',
+  user  => 'deploy',
+  group => 'deploy',
+  path  => '/var/nodes',
 }
 ```
