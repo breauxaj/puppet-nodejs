@@ -7,10 +7,10 @@
  
 . /etc/rc.d/init.d/functions
  
-USER="<%= user %>"
+USER="<%= @user %>"
  
 DAEMON="/usr/bin/node"
-ROOT_DIR="<%= path %>/<%= name %>"
+ROOT_DIR="<%= @path %>/<%= @name %>"
  
 SERVER="$ROOT_DIR/server.js"
 LOG_FILE="$ROOT_DIR/server.js.log"

@@ -16,8 +16,8 @@ define nodejs::service ( $ensure,
 
 }
 
-define nodejs::npm {
-  package { "nodejs-$name": ensure => latest}
+define nodejs::npm ( $required ) {
+  package { "nodejs-${required}": ensure => latest }
 
 }
 
