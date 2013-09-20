@@ -15,9 +15,6 @@ include nodejs
 nodejs::service { 'default': ensure => running, enable => true }
 ```
 ```
-nodejs::npm { 'default': required => [ 'options', 'watchit' ] }
-```
-```
 nodejs::instance { 'default':
   user  => 'deploy',
   group => 'deploy',
