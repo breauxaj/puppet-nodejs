@@ -11,10 +11,11 @@ define nodejs::instance (
   }
 
   file { "${path}/${name}":
-    ensure => directory,
-    owner  => $user,
-    group  => $group,
-    mode   => '0775',
+    ensure  => directory,
+    owner   => $user,
+    group   => $group,
+    mode    => '0775',
+    require => File[$path],
   }
 
   file { "/etc/init.d/nodejs-${name}":
