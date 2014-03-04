@@ -52,7 +52,8 @@ case "$1" in
           do_start
           ;;
   status)
-	        status $DAEMON
+          pid=`ps -aefw | grep "$DAEMON $SERVER" | grep -v " grep " | awk '{print $2}'`
+	        status -p $pid
 	        RETVAL=$?
 	        ;;
   *)
