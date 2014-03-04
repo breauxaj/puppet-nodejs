@@ -51,6 +51,10 @@ case "$1" in
           do_stop
           do_start
           ;;
+  status)
+	        status $prog
+	        RETVAL=$?
+	        ;;
   *)
           echo "Usage: $0 {start|stop|restart}"
           RETVAL=1
