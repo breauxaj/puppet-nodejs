@@ -6,7 +6,7 @@ define nodejs::instance (
   file { $path:
     ensure => directory,
     owner  => 'root',
-    group  => 'root',
+    group  => $group,
     mode   => '0775',
   }
 
