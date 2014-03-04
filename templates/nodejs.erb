@@ -52,8 +52,8 @@ case "$1" in
           do_start
           ;;
   status)
-          pid=`ps -aefw | grep "$DAEMON $SERVER" | grep -v " grep " | awk '{print $2}'`
-	        status -p $pid
+          
+	        status <%= name %>
 	        RETVAL=$?
 	        ;;
   *)
