@@ -52,7 +52,7 @@ case "$1" in
           do_start
           ;;
   status)
-	        status $prog
+	        status $DAEMON
 	        RETVAL=$?
 	        ;;
   *)
