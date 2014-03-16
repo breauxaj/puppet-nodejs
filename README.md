@@ -21,3 +21,11 @@ nodejs::instance { 'default':
   path  => '/var/nodes',
 }
 ```
+
+License
+-------
+GPL3
+
+Contact
+-------
+breauxaj AT gmail DOT com
