@@ -52,9 +52,9 @@ case "$1" in
           do_start
           ;;
   status)
-	        status -p $LOCK_FILE
-	        RETVAL=$?
-	        ;;
+          status -p $LOCK_FILE
+          RETVAL=$?
+          ;;
   *)
           echo "Usage: $0 {start|stop|restart}"
           RETVAL=1
