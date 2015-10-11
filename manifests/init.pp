@@ -1,14 +1,17 @@
 # Class: nodejs
 #
-# This class installs the nodejs package
+# This class installs the nodejs tarball
 #
 # Parameters:
 #
-#  ensure: (default latest)
-#    Determine the state of the packages
+#  version: (default 4.1.2)
+#    Specify the version to be downloaded
+#
+#  source: (default https://nodejs.org/dist)
+#    Override the URL to download tarball
 #
 # Actions:
-#   - Installs the nodejs package
+#   - Installs the nodejs official tarball
 #
 # Requires:
 #
@@ -17,22 +20,55 @@
 #  For a standard installation, use:
 #
 #    class { 'nodejs':
-#      ensure => 'latest'
-#    }
-#
-#  To remove the installation, use:
-#
-#    class { 'nodejs':
-#      ensure => 'absent'
+#      version => '4.1.2'
 #    }
 #
 class nodejs (
-  $ensure = 'latest'
+  $version = '4.1.2',
+  $source = 'https://nodejs.org/dist'
 ){
-  $required = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => 'nodejs',
+  exec { 'get-nodejs':
+    path    => '/bin:/usr/bin',
+    command => "wget ${source}/v${version}/node-v${version}-linux-x64.tar.gz",
+    cwd     => '/tmp',
+    creates => "/tmp/node-v${version}-linux-x64.tar.gz",
+    timeout => 10000,
+    onlyif  => "test ! -d /usr/local/node-v${version}-linux-x64",
   }
 
-  package { $required: ensure => $ensure }
+  exec { 'untar-nodejs':
+    path    => '/bin:/usr/bin',
+    command => "tar -zxf /tmp/node-v${version}-linux-x64.tar.gz",
+    cwd     => '/usr/local',
+    creates => "/usr/local/node-v${version}-linux-x64",
+    timeout => 10000,
+    require => Exec['get-nodejs'],
+  }
+
+  file { "/usr/local/node-v${version}-linux-x64":
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    recurse => true,
+    require => Exec['untar-nodejs'],
+  }
+
+  file { '/usr/local/nodejs':
+    ensure  => 'link',
+    owner   => 'root',
+    group   => 'root',
+    target  => "/usr/local/node-v${version}-linux-x64",
+    require => Exec['untar-nodejs'],
+  }
+
+  file { '/etc/profile.d/nodejs.sh':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/nodejs/profile.txt',
+  }
+
+  package { 'nodejs': ensure => absent }
 
 }
