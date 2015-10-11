@@ -1,0 +1,5 @@
+# MANAGED BY PUPPET!
+if [ -d /usr/local/nodejs ]; then
+  export NODEJS_HOME=/usr/local/nodejs
+  export PATH=${NODEJS_HOME}/bin:${PATH}
+fi
