@@ -12,13 +12,8 @@ Samples
 include nodejs
 ```
 ```
-nodejs::service { 'default': ensure => running, enable => true }
-```
-```
-nodejs::instance { 'default':
-  user  => 'deploy',
-  group => 'deploy',
-  path  => '/var/nodes',
+class { 'nodejs':
+  version => '4.1.2'
 }
 ```
 
